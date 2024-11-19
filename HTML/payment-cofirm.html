@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Confirmation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script>
+    // Kiểm tra trạng thái đăng nhập và cập nhật navbar khi tải trang
+    function checkLoginStatus() {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      const loginLink = document.getElementById('login-link');
+      const signupLink = document.getElementById('signup-link');
+      const accountLink = document.getElementById('account-link');
+      const logoutLink = document.getElementById('logout-link');
+      
+      if (loggedIn) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        accountLink.style.display = 'block';
+        logoutLink.style.display = 'block';
+      } else {
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+        accountLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    }
+
+    // Hàm đăng xuất
+    function logout() {
+      localStorage.setItem('loggedIn', 'false');
+      alert("Bạn đã đăng xuất.");
+      window.location.reload();  // Tải lại trang để cập nhật navbar
+    }
+
+    // Chạy kiểm tra đăng nhập khi trang được tải
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="home.html">PHL'sDrC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="../HTML/home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="../HTML/login.html">Login</a></li>
+          <li class="nav-item" id="signup-link"><a class="nav-link" href="../HTML/register.html">Sign Up</a></li>
+          <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="../HTML/account.html">Account</a></li>
+          <li class="nav-item" id="logout-link" style="display: none;">
+            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
+              <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Confirmation Message -->
+  <section class="py-5">
+    <div class="container text-center">
+      <h1 class="fw-bold text-success">Thank You!</h1>
+      <p>Your order has been successfully placed.</p>
+      <p>We will contact you shortly with further details.</p>
+      <a href="cars.html" class="btn btn-primary mt-3">Back to Cars</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 LuxuryAuto. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>

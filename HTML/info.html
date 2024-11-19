@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - PHL'sDrC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Lora:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/about.css">
+  <script>
+    // Kiểm tra trạng thái đăng nhập và cập nhật navbar khi tải trang
+    function checkLoginStatus() {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      const loginLink = document.getElementById('login-link');
+      const signupLink = document.getElementById('signup-link');
+      const accountLink = document.getElementById('account-link');
+      const logoutLink = document.getElementById('logout-link');
+      
+      if (loggedIn) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        accountLink.style.display = 'block';
+        logoutLink.style.display = 'block';
+      } else {
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+        accountLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    }
+
+    // Hàm đăng xuất
+    function logout() {
+      localStorage.setItem('loggedIn', 'false');
+      alert("You have logged out.");
+      window.location.reload();  // Tải lại trang để cập nhật navbar
+    }
+
+    // Chạy kiểm tra đăng nhập khi trang được tải
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+  </script>
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f4f5f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #343a40;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-brand {
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .navbar-nav .nav-link {
+      color: #ddd;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #f8f9fa;
+      transition: color 0.3s;
+    }
+
+    .hero-section {
+      background-image: url('https://cdn10.bigcommerce.com/s-7f2gq5h/product_images/uploaded_images/semtech-circuitry-provides-robust-esd-and-transient-protection-for-automotive-can-bus-can-fd-and-can-transceiver-nodes.jpg?t=1550846137');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      padding: 100px 0;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+      text-align: center;
+    }
+
+    .hero-section h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 4.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .hero-section p {
+      font-family: 'Lora', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #343a40;
+    }
+
+    .about-section {
+      padding: 80px 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 60px;
+    }
+
+    .about-section h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      color: #333;
+      font-size: 1.5rem;
+    }
+
+    .about-section p {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* New Box Styles */
+    .info-box {
+      border: 2px solid #007bff;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #f8f9fa;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .info-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .info-box h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      color: #007bff;
+    }
+
+    .info-box p {
+      font-family: 'Lora', serif;
+      color: #555;
+    }
+
+    .contact-section {
+      background-color: #f1f3f5;
+      padding: 60px 20px;
+    }
+
+    .contact-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #343a40;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .contact-section .form-control {
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .footer {
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 3rem;
+      }
+      .hero-section p {
+        font-size: 1.2rem;
+      }
+
+      .about-section {
+        padding: 60px 15px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="../HTML/home.html">
+        <img src="../IMG/image.png" alt="Logo" class="me-2" style="width: 40px; height: 40px;">
+        <span>PHL'sDrC</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="../HTML/home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="../HTML/login.html">Login</a></li>
+          <li class="nav-item" id="signup-link"><a class="nav-link" href="../HTML/register.html">Sign Up</a></li>
+          <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="../HTML/account.html">Account</a></li>
+          <li class="nav-item" id="logout-link" style="display: none;">
+            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
+              <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="container">
+      <h1>Welcome to PHL'sDrC</h1>
+      <p>Your Trusted Destination for Luxury and Performance Cars</p>
+    </div>
+  </header>
+
+  <!-- About Us Section -->
+  <section class="about-section">
+    <div class="container">
+      <h2 class="section-title">About PHL'sDrC</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="info-box">
+            <h4>Who We Are</h4>
+            <p>At PHL'sDrC, we specialize in luxury cars, focusing on performance, design, and reliability. We aim to provide you with the finest selection of vehicles, ensuring a smooth and enjoyable experience while purchasing your dream car.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="info-box">
+            <h4>Our Mission</h4>
+            <p>Our mission is to offer high-performance vehicles that combine luxury and reliability. We strive to create an extraordinary car buying experience, with exceptional service, expert advice, and a wide selection to choose from.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="info-box">
+            <h4>Our Vision</h4>
+            <p>We aspire to become the leading provider of luxury cars worldwide. Our vision is to build lasting relationships with our clients by offering them unparalleled value and a seamless, enjoyable experience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Your Name">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Your Email">
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 PHL'sDrC. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

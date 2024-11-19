@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-image: url(../IMG/2017-Bugatti-Chiron-0-60-mph-2.3-768x474.jpg);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .register-card {
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+    }
+    .register-title {
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #f3eeee;
+    }
+    .btn-custom {
+      background: #339af4;
+      border: none;
+      color: #fff;
+    }
+    .btn-custom:hover {
+      background: #339af4;
+    }
+    .text-small {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .text-small a {
+      color: #339af4;
+      text-decoration: none;
+    }
+    .text-small a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    // Đăng ký tài khoản mới
+    function handleRegister(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      // Kiểm tra email đã tồn tại
+      if (users.some(u => u.email === email)) {
+        alert("Email is already registered!");
+        return;
+      }
+
+      // Kiểm tra mật khẩu
+      if (password.length < 6) {
+        alert("Password must be at least 6 characters!");
+        return;
+      }
+
+      // Kiểm tra mật khẩu trùng khớp
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      // Lưu thông tin tài khoản
+      const newUser = { name, email, password };
+      users.push(newUser);
+      localStorage.setItem("users", JSON.stringify(users));
+      alert("Registration successful! Please log in.");
+      window.location.href = "login.html";
+    }
+  </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
+        <div class="container">
+          <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="../IMG/image.png" alt="Logo" class="me-2" style="width: 40px; height: 40px;">
+            <span class="fw-bold">PHL'sDrC</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+              <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+              <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
+              <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div class="register-card">
+        <h2 class="text-center register-title">Create an Account</h2>
+        <form onsubmit="handleRegister(event)">
+        <div class="mb-3">
+            <label for="name" class="form-label text-light">Full Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label text-light">Email Address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label text-light">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Create a password" minlength="6" required>
+        </div>
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label text-light">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+        </div>
+        <button type="submit" class="btn btn-custom w-100">Register</button>
+        <p class="text-center text-small mt-3 text-light">Already have an account? <a href="login.html">Log in</a></p>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lamborghini Aventador LP700-4 - Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/car_detail.css">
+  <script>
+    // Kiểm tra trạng thái đăng nhập và cập nhật navbar khi tải trang
+    function checkLoginStatus() {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      const loginLink = document.getElementById('login-link');
+      const signupLink = document.getElementById('signup-link');
+      const accountLink = document.getElementById('account-link');
+      const logoutLink = document.getElementById('logout-link');
+      
+      if (loggedIn) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        accountLink.style.display = 'block';
+        logoutLink.style.display = 'block';
+      } else {
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+        accountLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    }
+
+    // Kiểm tra nếu người dùng đã đăng nhập trước khi xem chi tiết
+    function checkIfLoggedIn(targetPage) {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      if (!loggedIn) {
+        alert("Please log in to view details!");
+        window.location.href = "../HTML/login.html";
+      } else {
+        // Redirect to the target page even if already logged in
+        window.location.href = targetPage;
+      }
+    }
+
+    // Hàm đăng xuất
+    function logout() {
+      localStorage.setItem('loggedIn', 'false');
+      alert("You have logged out.");
+      window.location.reload();  // Tải lại trang để cập nhật navbar
+    }
+
+    // Chạy kiểm tra đăng nhập khi trang được tải
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="home.html">PHL'sDrC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="../HTML/home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="../HTML/login.html">Login</a></li>
+          <li class="nav-item" id="signup-link"><a class="nav-link" href="../HTML/register.html">Sign Up</a></li>
+          <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="../HTML/account.html">Account</a></li>
+          <li class="nav-item" id="logout-link" style="display: none;">
+            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
+              <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Car Details Section -->
+  <section class="py-5">
+    <div class="container">
+      <h1 class="text-center fw-bold mb-4">Porsche 911 Carrera S</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Image Gallery -->
+          <div class="main-image">
+            <img id="main-image" src="../IMG/posrche911.jpeg" class="img-fluid rounded" alt="Porsche 911 Carrera S">
+          </div>
+
+          <div class="thumbnail-images mt-3">
+            <div class="row">
+              <!-- Thumbnail 1 -->
+              <div class="col-4">
+                <img src="../IMG/2020_porsche_911_25_2560x1440.jpg" class="img-fluid rounded thumbnail" alt="Thumbnail 1" onclick="changeImage('../IMG/2020_porsche_911_25_2560x1440.jpg')">
+              </div>
+              <!-- Thumbnail 2 -->
+              <div class="col-4">
+                <img src="../IMG/poscheS.jpeg" class="img-fluid rounded thumbnail" alt="Thumbnail 2" onclick="changeImage('../IMG/poscheS.jpeg')">
+              </div>
+              <!-- Thumbnail 3 -->
+              <div class="col-4">
+                <img src="../IMG/posrche911.jpeg" class="img-fluid rounded thumbnail" alt="Thumbnail 3" onclick="changeImage('../IMG/posrche911.jpeg')">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h2>1. Engine</h2>
+          <ul>
+              <li><strong>Engine Type:</strong> 3.0-liter twin-turbocharged flat-six engine</li>
+              <li><strong>Power Output:</strong> 443 horsepower (331 kW)</li>
+              <li><strong>Torque:</strong> 390 lb-ft (529 Nm)</li>
+          </ul>
+
+          <h2>2. Horsepower</h2>
+          <ul>
+              <p>443 horsepower at 6,500 rpm, which allows the car to accelerate from 0-60 mph (0-100 km/h) in approximately 3.5 seconds when equipped with the Sport Chrono package.</p>
+          </ul>
+
+          <h2>3. Performance:</h2>
+            <ul>
+                <li><strong>City:</strong> 18 mpg (13.1 L/100 km)</li>
+                <li><strong>Highway:</strong> 25 mpg (9.4 L/100 km)</li>
+                <li><strong>Combined:</strong> 21 mpg (11.2 L/100 km)</li>
+            </ul>
+
+          <h2>4. Features</h2>
+          <div class="specs">
+              <h3>Performance Features:</h3>
+              <ul>
+                  <li>Porsche Active Suspension Management (PASM)</li>
+                  <li>Sport Exhaust System</li>
+                  <li>Porsche Torque Vectoring Plus (PTV+)</li>
+                  <li>Rear-wheel drive (optional all-wheel drive in Carrera 4S)</li>
+              </ul>
+
+              <h3>Interior:</h3>
+              <ul>
+                  <li>Leather upholstery</li>
+                  <li>14-way power-adjustable seats</li>
+                  <li>10.9-inch touchscreen infotainment system (Porsche Communication Management, PCM)</li>
+                  <li>Apple CarPlay and Android Auto compatibility</li>
+                  <li>Optional premium sound system (Bose or Burmester)</li>
+              </ul>
+
+              <h3>Safety and Driver Assistance:</h3>
+              <ul>
+                  <li>Adaptive Cruise Control</li>
+                  <li>Lane Keep Assist</li>
+                  <li>Front and rear parking sensors</li>
+                  <li>Forward collision warning and automatic emergency braking</li>
+                  <li>Optional Porsche InnoDrive with adaptive cruise control</li>
+              </ul>
+
+              <h3>Safety and Driver Assistance:</h3>
+              <ul>
+                  <li>LED headlights</li>
+                  <li>20-inch front and 21-inch rear wheels</li>
+                  <li>SportDesign Package (optional)</li>
+                  <li>Rear spoiler with active aerodynamics</li>
+              </ul>
+          </div>
+          <!-- Nút "Book Now" chỉ khả dụng khi đã đăng nhập -->
+          <a href="checkout.html?carModel=Porsche%20911%20Carrera%20S&carPrice=$250,000&carImage=../IMG/2020_porsche_911_25_2560x1440.jpg" class="btn btn-primary" id="book-now-btn" role="button">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 PHL'sDrC. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Change main image when a thumbnail is clicked
+    function changeImage(imageSrc) {
+      document.getElementById('main-image').src = imageSrc;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferrari 488 GTB - Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/car_detail.css">
+  <script>
+    // Kiểm tra trạng thái đăng nhập và cập nhật navbar khi tải trang
+    function checkLoginStatus() {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      const loginLink = document.getElementById('login-link');
+      const signupLink = document.getElementById('signup-link');
+      const accountLink = document.getElementById('account-link');
+      const logoutLink = document.getElementById('logout-link');
+      
+      if (loggedIn) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        accountLink.style.display = 'block';
+        logoutLink.style.display = 'block';
+      } else {
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+        accountLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    }
+
+    // Kiểm tra nếu người dùng đã đăng nhập trước khi xem chi tiết
+    function checkIfLoggedIn(targetPage) {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      if (!loggedIn) {
+        alert("Please log in to view details!");
+        window.location.href = "../HTML/login.html";
+      } else {
+        // Redirect to the target page even if already logged in
+        window.location.href = targetPage;
+      }
+    }
+
+    // Hàm đăng xuất
+    function logout() {
+      localStorage.setItem('loggedIn', 'false');
+      alert("You have logged out.");
+      window.location.reload();  // Tải lại trang để cập nhật navbar
+    }
+
+    // Chạy kiểm tra đăng nhập khi trang được tải
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="home.html">PHL'sDrC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link active" href="../HTML/home.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+            <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+            <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
+            <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+            <li class="nav-item" id="login-link"><a class="nav-link" href="../HTML/login.html">Login</a></li>
+            <li class="nav-item" id="signup-link"><a class="nav-link" href="../HTML/register.html">Sign Up</a></li>
+            <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="../HTML/account.html">Account</a></li>
+            <li class="nav-item" id="logout-link" style="display: none;">
+              <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
+                <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
+              </a>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Car Details Section -->
+  <section class="py-5">
+    <div class="container">
+      <h1 class="text-center fw-bold mb-4">Ferrari 488 GTB</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="main-image">
+            <img id="main-image" src="https://wallpapercave.com/wp/wp7015846.jpg" class="img-fluid rounded" alt="Ferrari 488 GTB">
+          </div>
+          <div class="thumbnail-images mt-3">
+            <div class="row">
+              <div class="col-4">
+                <img src="https://wallpapercave.com/wp/wp7015846.jpg" class="img-fluid rounded thumbnail" alt="Thumbnail 1" onclick="changeImage('https://wallpapercave.com/wp/wp7015846.jpg')">
+              </div>
+              <div class="col-4">
+                <img src="https://cimg2.ibsrv.net/ibimg/hgm/1920x1080-1/100/562/2016-ferrari-488-gtb_100562482.jpg" class="img-fluid rounded thumbnail" alt="Thumbnail 2" onclick="changeImage('https://cimg2.ibsrv.net/ibimg/hgm/1920x1080-1/100/562/2016-ferrari-488-gtb_100562482.jpg')">
+              </div>
+              <div class="col-4">
+                <img src="https://cdn.motor1.com/images/mgl/j1xQ1/s1/ferrari-488-gtb-by-pogea-racing.jpg" class="img-fluid rounded thumbnail" alt="Thumbnail 3" onclick="changeImage('https://cdn.motor1.com/images/mgl/j1xQ1/s1/ferrari-488-gtb-by-pogea-racing.jpg')">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h2>1. Engine</h2>
+          <ul>
+            <li><strong>Engine Type:</strong> 3.9L V8 Turbocharged</li>
+            <li><strong>Horsepower:</strong> 661 hp</li>
+          </ul>
+
+          <h2>2. Features</h2>
+          <ul>
+            <li><strong>Seats:</strong> 2</li>
+            <li><strong>Infotainment:</strong> Ferrari Multimedia System</li>
+          </ul>
+          <a href="checkout.html?carModel=Ferrari%20488%20GTB&carPrice=$330,000&carImage=https://wallpapercave.com/wp/wp7015846.jpg" class="btn btn-primary" role="button">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 PHL'sDrC. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function changeImage(imageSrc) {
+      document.getElementById('main-image').src = imageSrc;
+    }
+  </script>
+</body>
+</html>

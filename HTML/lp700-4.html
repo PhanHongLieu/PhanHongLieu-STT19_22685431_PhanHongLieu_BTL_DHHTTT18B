@@ -1,0 +1,175 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lamborghini Aventador LP700-4 - Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/car.css">
+  <script>
+    // Kiểm tra trạng thái đăng nhập và cập nhật navbar khi tải trang
+    function checkLoginStatus() {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      const loginLink = document.getElementById('login-link');
+      const signupLink = document.getElementById('signup-link');
+      const accountLink = document.getElementById('account-link');
+      const logoutLink = document.getElementById('logout-link');
+      
+      if (loggedIn) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        accountLink.style.display = 'block';
+        logoutLink.style.display = 'block';
+      } else {
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+        accountLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    }
+
+    // Kiểm tra nếu người dùng đã đăng nhập trước khi xem chi tiết
+    function checkIfLoggedIn(targetPage) {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      if (!loggedIn) {
+        alert("Please log in to view details!");
+        window.location.href = "../HTML/login.html";
+      } else {
+        // Redirect to the target page even if already logged in
+        window.location.href = targetPage;
+      }
+    }
+
+    // Hàm đăng xuất
+    function logout() {
+      localStorage.setItem('loggedIn', 'false');
+      alert("You have logged out.");
+      window.location.reload();  // Tải lại trang để cập nhật navbar
+    }
+
+    // Chạy kiểm tra đăng nhập khi trang được tải
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="home.html">PHL'sDrC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="../HTML/home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="../HTML/login.html">Login</a></li>
+          <li class="nav-item" id="signup-link"><a class="nav-link" href="../HTML/register.html">Sign Up</a></li>
+          <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="../HTML/account.html">Account</a></li>
+          <li class="nav-item" id="logout-link" style="display: none;">
+            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
+              <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Car Details Section -->
+  <section class="py-5">
+    <div class="container">
+      <h1 class="text-center fw-bold mb-4">Lamborghini Aventador LP700-4</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <!-- Image Gallery -->
+          <div class="main-image">
+            <img id="main-image" src="../IMG/lb_works_aventador_gt_evo_3.jpg" class="img-fluid rounded" alt="Lamborghini Aventador LP700-4">
+          </div>
+
+          <div class="thumbnail-images mt-3">
+            <div class="row">
+              <!-- Thumbnail 1 -->
+              <div class="col-4">
+                <img src="../IMG/lb_works_aventador_gt_evo_3.jpg" class="img-fluid rounded thumbnail" alt="Thumbnail 1" onclick="changeImage('../IMG/lb_works_aventador_gt_evo_3.jpg')">
+              </div>
+              <!-- Thumbnail 2 -->
+              <div class="col-4">
+                <img src="../IMG/lp700-4-1.jpeg" class="img-fluid rounded thumbnail" alt="Thumbnail 2" onclick="changeImage('../IMG/lp700-4-1.jpeg')">
+              </div>
+              <!-- Thumbnail 3 -->
+              <div class="col-4">
+                <img src="../IMG/LAMBORGHINI-Aventador-LP-700-4-Roadster-4692_18.jpg" class="img-fluid rounded thumbnail" alt="Thumbnail 3" onclick="changeImage('../IMG/LAMBORGHINI-Aventador-LP-700-4-Roadster-4692_18.jpg')">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h2>1. Engine</h2>
+          <ul>
+              <li><strong>Engine Type:</strong> 6.5L V12, Naturally Aspirated</li>
+              <li><strong>Horsepower:</strong> 700 hp @ 8,250 rpm</li>
+              <li><strong>Torque:</strong> 690 Nm @ 5,500 rpm</li>
+          </ul>
+
+          <h2>2. Fuel Economy</h2>
+          <ul>
+              <li><strong>Combined Fuel Consumption:</strong> Approximately 15-16 L/100 km</li>
+              <li><strong>Highway Fuel Consumption:</strong> Around 11-12 L/100 km</li>
+              <li><strong>City Fuel Consumption:</strong> Around 20-22 L/100 km</li>
+          </ul>
+
+          <h2>3. Features</h2>
+          <div class="specs">
+              <h3>Performance:</h3>
+              <ul>
+                  <li><strong>Transmission:</strong> 7-speed ISR automated manual transmission</li>
+                  <li><strong>Drivetrain:</strong> All-Wheel Drive (AWD)</li>
+                  <li><strong>0-100 km/h (0-62 mph):</strong> Approximately 2.9 seconds</li>
+                  <li><strong>Top Speed:</strong> 350 km/h (217 mph)</li>
+              </ul>
+
+              <h3>Safety & Driving Assistance:</h3>
+              <ul>
+                  <li><strong>Brakes:</strong> Carbon-ceramic brakes</li>
+                  <li><strong>Traction Control:</strong> Advanced traction control system</li>
+                  <li><strong>Driving Modes:</strong> Strada (Street), Sport, and Corsa (Track)</li>
+              </ul>
+
+              <h3>Interior & Comfort:</h3>
+              <ul>
+                  <li><strong>Seats:</strong> Sports seats with electric adjustments</li>
+                  <li><strong>Interior Materials:</strong> Premium leather upholstery</li>
+                  <li><strong>Entertainment:</strong> High-quality audio system, infotainment screen</li>
+              </ul>
+          </div>
+          <!-- Nút "Book Now" chỉ khả dụng khi đã đăng nhập -->
+          <a href="checkout.html?carModel=Lamborghini%20Aventador%20LP700-4&carPrice=$400,000&carImage=../IMG/lb_works_aventador_gt_evo_3.jpg" class="btn btn-primary" id="book-now-btn" role="button">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 PHL'sDrC. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Bootstrap Bundle JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Change main image when a thumbnail is clicked
+    function changeImage(imageSrc) {
+      document.getElementById('main-image').src = imageSrc;
+    }
+  </script>
+</body>
+</html>

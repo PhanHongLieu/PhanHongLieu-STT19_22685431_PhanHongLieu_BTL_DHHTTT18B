@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url(../IMG/2017-Bugatti-Chiron-0-60-mph-2.3-768x474.jpg);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-container {
+      padding: 30px;
+      max-width: 400px;
+      width: 100%;
+    }
+    .login-container h2 {
+      margin-bottom: 20px;
+      color: #333;
+      font-weight: bold;
+    }
+    .btn-primary {
+      background: #6a11cb;
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #5a0fb5;
+    }
+    .form-control {
+      background: #f9f9f9;
+      border: none;
+      border-radius: 5px;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .form-control:focus {
+      box-shadow: 0 0 5px #6a11cb;
+      outline: none;
+    }
+    .form-label {
+      color: #f9f3f3;
+      font-weight: 500;
+    }
+    .text-center a {
+      color: #6a11cb;
+      text-decoration: none;
+    }
+    .text-center a:hover {
+      text-decoration: underline;
+    }
+    .error-message {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+  <script>
+    function updateNavbar() {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      const accountLink = document.getElementById('account-link');
+      const logoutLink = document.getElementById('logout-link');
+      const loginLink = document.getElementById('login-link');
+      const signupLink = document.getElementById('signup-link');
+
+      if (loggedIn) {
+        accountLink.style.display = 'block';
+        logoutLink.style.display = 'block';
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+      } else {
+        accountLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+      }
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      const errorMessage = document.getElementById("error-message");
+      const user = users.find(u => u.email === email && u.password === password);
+
+      if (user) {
+        errorMessage.textContent = "";
+        alert("Login successful!");
+        localStorage.setItem("loggedIn", "true");
+        localStorage.setItem("loggedInUser", JSON.stringify(user));
+        window.location.href = "home.html";
+      } else {
+        errorMessage.textContent = "Invalid email or password. Please try again.";
+      }
+    }
+
+    // Chạy khi tải trang
+    document.addEventListener('DOMContentLoaded', updateNavbar);
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="../IMG/image.png" alt="Logo" class="me-2" style="width: 40px; height: 40px;">
+        <span class="fw-bold">PHL'sDrC</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="login.html">Login</a></li>
+          <li class="nav-item" id="signup-link"><a class="nav-link" href="register.html">Sign Up</a></li>
+          <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="account.html">Account</a></li>
+          <li class="nav-item" id="logout-link" style="display: none;">
+            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
+              <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="login-container">
+    <h2 class="text-center text-info">Login</h2>
+    <form onsubmit="handleLogin(event)">
+      <div class="mb-3">
+        <label for="email" class="form-label text-info">Email address</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label text-info">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+      </div>
+      <div class="error-message" id="error-message"></div>
+      <button type="submit" class="btn btn-primary w-100 mt-3">Login</button>
+      <p class="mt-3 text-center text-info">Don't have an account? <a href="register.html">Sign Up</a></p>
+    </form>
+  </div>
+  
+</body>
+</html>

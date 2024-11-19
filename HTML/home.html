@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHL'sDrC - Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/home.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+  <script>
+    // Kiểm tra trạng thái đăng nhập và cập nhật navbar khi tải trang
+    function checkLoginStatus() {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      const loginLink = document.getElementById('login-link');
+      const signupLink = document.getElementById('signup-link');
+      const accountLink = document.getElementById('account-link');
+      const logoutLink = document.getElementById('logout-link');
+      
+      if (loggedIn) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        accountLink.style.display = 'block';
+        logoutLink.style.display = 'block';
+      } else {
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+        accountLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    }
+
+    // Kiểm tra nếu người dùng đã đăng nhập trước khi xem chi tiết
+    function checkIfLoggedIn(targetPage) {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      if (!loggedIn) {
+        alert("Please log in to view details!");
+        window.location.href = "../HTML/login.html";
+      } else {
+        // Redirect to the target page even if already logged in
+        window.location.href = targetPage;
+      }
+    }
+
+    // Hàm đăng xuất
+    function logout() {
+      localStorage.setItem('loggedIn', 'false');
+      alert("You have logged out.");
+      window.location.reload();  // Tải lại trang để cập nhật navbar
+    }
+
+    // Chạy kiểm tra đăng nhập khi trang được tải
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+  </script>
+</head>
+
+<body>
+    
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="../IMG/image.png" alt="Logo" class="me-2" style="width: 40px; height: 40px;">
+        <span class="fw-bold">PHL'sDrC</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="../HTML/login.html">Login</a></li>
+          <li class="nav-item" id="signup-link"><a class="nav-link" href="../HTML/register.html">Sign Up</a></li>
+          <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="../HTML/account.html">Account</a></li>
+          <li class="nav-item" id="logout-link" style="display: none;">
+            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
+            <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="home" class="hero-section text-white text-center">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Drive Your Dream Car Today</h1>
+      <p class="lead">Luxury, Performance, and Reliability All in One Place</p>
+      <a href="../HTML/car.html" class="btn btn-info btn-lg mt-4">Explore Cars</a>
+    </div>
+  </header>
+
+  <!-- Cars Section -->
+  <section id="cars" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-4">Our Premium Cars</h2>
+      <div class="row g-4">
+        <!-- Car Cards -->
+        <div class="col-md-4">
+          <div class="card car-card">
+            <img src="../IMG/lb_works_aventador_gt_evo_3.jpg" class="card-img-top" alt="Car 1">
+            <div class="card-body text-center">
+              <h5 class="card-title">Lamborghini Aventador LP700-4</h5>
+              <p class="card-text text-primary">$400,000</p>
+              <a href="javascript:void(0);" onclick="checkIfLoggedIn('lp700-4.html')" class="btn btn-outline-primary">View Details</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card car-card">
+            <img src="../IMG/2020_porsche_911_25_2560x1440.jpg" class="card-img-top" alt="Car 2">
+            <div class="card-body text-center">
+              <h5 class="card-title">Porsche 911 Carrera S</h5>
+              <p class="card-text text-primary">$250,000</p>
+              <a href="javascript:void(0);" onclick="checkIfLoggedIn('porsche911.html')" class="btn btn-outline-primary">View Details</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card car-card">
+            <img src="../IMG/Aston-Martin-Valhalla2-2048x1229.jpg" class="card-img-top" alt="Car 3">
+            <div class="card-body text-center">
+              <h5 class="card-title">Aston Martin Valhalla</h5>
+              <p class="card-text text-primary">$1,300,000</p>
+              <a href="javascript:void(0);" onclick="checkIfLoggedIn('valhalla.html')" class="btn btn-outline-primary">View Details</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section id="reviews" class="py-5">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-4">What Our Customers Say</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm">
+            <blockquote class="blockquote">
+              <p>"Best car buying experience ever! Amazing service and great prices."</p>
+            </blockquote>
+            <footer class="blockquote-footer">John Doe</footer>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm">
+            <blockquote class="blockquote">
+              <p>"High-quality vehicles and excellent customer support. Highly recommend!"</p>
+            </blockquote>
+            <footer class="blockquote-footer">Jane Smith</footer>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 shadow-sm">
+            <blockquote class="blockquote">
+              <p>"LuxuryAuto made buying my dream car a reality. 10/10 experience!"</p>
+            </blockquote>
+            <footer class="blockquote-footer">Alex Brown</footer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-light py-5">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-4">Contact Us</h2>
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Your Name">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Your Email">
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message</label>
+          <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 PHL'sDrC. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Cars - PHL'sDrC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/car_detail.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script>
+    // Kiểm tra trạng thái đăng nhập và cập nhật navbar khi tải trang
+    function checkLoginStatus() {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      const loginLink = document.getElementById('login-link');
+      const signupLink = document.getElementById('signup-link');
+      const accountLink = document.getElementById('account-link');
+      const logoutLink = document.getElementById('logout-link');
+      
+      if (loggedIn) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        accountLink.style.display = 'block';
+        logoutLink.style.display = 'block';
+      } else {
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+        accountLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    }
+
+    // Kiểm tra nếu người dùng đã đăng nhập trước khi xem chi tiết
+    function checkIfLoggedIn(targetPage) {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      if (!loggedIn) {
+        alert("Please log in to view details!");
+        window.location.href = "../HTML/login.html";
+      } else {
+        // Redirect to the target page even if already logged in
+        window.location.href = targetPage;
+      }
+    }
+
+    // Hàm đăng xuất
+    function logout() {
+      localStorage.setItem('loggedIn', 'false');
+      alert("You have logged out.");
+      window.location.reload();  // Tải lại trang để cập nhật navbar
+    }
+
+    // Chạy kiểm tra đăng nhập khi trang được tải
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="../IMG/image.png" alt="Logo" class="me-2" style="width: 40px; height: 40px;">
+        <span class="fw-bold">PHL'sDrC</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="../HTML/home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="../HTML/login.html">Login</a></li>
+          <li class="nav-item" id="signup-link"><a class="nav-link" href="../HTML/register.html">Sign Up</a></li>
+          <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="../HTML/account.html">Account</a></li>
+          <li class="nav-item" id="logout-link" style="display: none;">
+            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
+              <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Cars Section -->
+  <section class="py-5">
+    <div class="container">
+      <h1 class="text-center fw-bold mb-4">Our Cars by Brands</h1>
+
+      <!-- Tabs Navigation -->
+      <ul class="nav nav-tabs mb-4 justify-content-center" id="brandTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="rollsroyce-tab" data-bs-toggle="tab" data-bs-target="#rollsroyce" type="button" role="tab">Rolls-Royce</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="porsche-tab" data-bs-toggle="tab" data-bs-target="#porsche" type="button" role="tab">Porsche</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="astonMartin-tab" data-bs-toggle="tab" data-bs-target="#astonMartin" type="button" role="tab">Aston Martin</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="bugatti-tab" data-bs-toggle="tab" data-bs-target="#bugatti" type="button" role="tab">Bugatti</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="lamborghini-tab" data-bs-toggle="tab" data-bs-target="#lamborghini" type="button" role="tab">Lamborghini</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="audi-tab" data-bs-toggle="tab" data-bs-target="#audi" type="button" role="tab">Audi</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="cadillac-tab" data-bs-toggle="tab" data-bs-target="#cadillac" type="button" role="tab">Cadillac</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="ferrari-tab" data-bs-toggle="tab" data-bs-target="#ferrari" type="button" role="tab">Ferrari</button>
+        </li>
+      </ul>
+
+      <!-- Tabs Content -->
+      <div class="tab-content" id="brandTabsContent">
+        <!-- Rolls-Royce Cars -->
+        <div class="tab-pane fade show active" id="rollsroyce" role="tabpanel">
+            <div class="row g-4">
+            <!-- Rolls-Royce Phantom -->
+            <div class="col-md-4">
+                <div class="card car-card">
+                <img src="https://wallpapers.com/images/hd/rolls-royce-phantom-10-iz0a2mnfra19vm9s.jpg" class="card-img-top" alt="Rolls-Royce Phantom">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Rolls-Royce Phantom</h5>
+                    <p class="text-primary">$460,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('rolls_royce_phantom_details.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+                </div>
+            </div>
+        
+            <!-- Rolls-Royce Ghost -->
+            <div class="col-md-4">
+                <div class="card car-card">
+                <img src="../IMG/rolls-royce-ghost-extended-by-private-office-dubai.jpg" class="card-img-top" alt="Rolls-Royce Ghost">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Rolls-Royce Ghost</h5>
+                    <p class="text-primary">$340,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('rolls_royce_ghost_details.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+                </div>
+            </div>
+        
+            <!-- Rolls-Royce Cullinan -->
+            <div class="col-md-4">
+                <div class="card car-card">
+                <img src="https://th.bing.com/th/id/R.952abd48fcdece0af49c0002cf066f14?rik=d%2fkFZBkYyiDEmw&pid=ImgRaw&r=0" class="card-img-top" alt="Rolls-Royce Cullinan">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Rolls-Royce Cullinan</h5>
+                    <p class="text-primary">$350,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('rolls_royce_cullinan_details.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Porsche Cars -->
+        <div class="tab-pane fade" id="porsche" role="tabpanel">
+            <div class="row g-4">
+                <!-- Porsche 911 Carrera -->
+                <div class="col-md-4">
+                    <div class="card car-card">
+                        <img src="../IMG/2020_porsche_911_25_2560x1440.jpg" class="card-img-top" alt="Porsche 911 Carrera">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Porsche 911 Carrera S</h5>
+                            <p class="text-primary">$250,000</p>
+                            <a href="javascript:void(0);" onclick="checkIfLoggedIn('porsche911.html')" class="btn btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Porsche Taycan -->
+                <div class="col-md-4">
+                    <div class="card car-card">
+                        <img src="https://www.motortrend.com/uploads/sites/5/2020/02/2020-Porsche-Taycan-Turbo-S-Track-Ride-7.gif" class="card-img-top" alt="Porsche Taycan">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Porsche Taycan</h5>
+                            <p class="text-primary">$105,000</p>
+                            <a href="javascript:void(0);" onclick="checkIfLoggedIn('porsche_taycan_details.html')" class="btn btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Porsche Cayenne -->
+                <div class="col-md-4">
+                    <div class="card car-card">
+                        <img src="https://cdn.motor1.com/images/mgl/P3WG8K/s1/2024-porsche-cayenne.jpg" class="card-img-top" alt="Porsche Cayenne">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Porsche Cayenne</h5>
+                            <p class="text-primary">$80,000</p>
+                            <a href="javascript:void(0);" onclick="checkIfLoggedIn('porsche_cayenne_details.html')" class="btn btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aston Martin Cars -->
+        <div class="tab-pane fade" id="astonMartin" role="tabpanel">
+            <div class="row g-4">
+                <!-- Aston Martin Valhalla -->
+                <div class="col-md-4">
+                    <div class="card car-card">
+                        <img src="https://uncrate.com/p/2023/09/aston-martin-valhalla-1.jpg" class="card-img-top" alt="Aston Martin Valhalla">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Aston Martin Valhalla</h5>
+                            <p class="text-primary">$1,300,000</p>
+                            <a href="javascript:void(0);" onclick="checkIfLoggedIn('valhalla.html')" class="btn btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aston Martin Vantage -->
+                <div class="col-md-4">
+                    <div class="card car-card">
+                        <img src="https://uncrate.com/p/2024/02/aston-martin-vantage-2.jpg" class="card-img-top" alt="Aston Martin Vantage">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Aston Martin Vantage</h5>
+                            <p class="text-primary">$139,000</p>
+                            <a href="javascript:void(0);" onclick="checkIfLoggedIn('aston_martin_vantage_details.html')" class="btn btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aston Martin DBS Superleggera -->
+                <div class="col-md-4">
+                    <div class="card car-card">
+                        <img src="https://th.bing.com/th/id/OIP.RdMoMay4TCgA9PrrMyhDkgHaE8?rs=1&pid=ImgDetMain" class="card-img-top" alt="Aston Martin DBS Superleggera">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Aston Martin DBS Superleggera</h5>
+                            <p class="text-primary">$316,000</p>
+                            <a href="javascript:void(0);" onclick="checkIfLoggedIn('aston_martin_dbs_superleggera_details.html')" class="btn btn-outline-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Bugatti Cars -->
+        <div class="tab-pane fade" id="bugatti" role="tabpanel">
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="card car-card">
+                <img src="https://www.gazzetta.gr/sites/default/files/inline-images/2021-07/bugatti-chiron-super-sport-300-prototype.jpg" class="card-img-top" alt="Bugatti Chiron">
+                <div class="card-body text-center">
+                  <h5 class="card-title">Bugatti Chiron</h5>
+                  <p class="text-primary">$3,000,000</p>
+                  <a href="javascript:void(0);" onclick="checkIfLoggedIn('bugatti_chiron.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card car-card">
+                <img src="https://th.bing.com/th/id/R.4b573f7ecc758e49040798a483ec3a31?rik=cwjSqn4H4PmrOA&pid=ImgRaw&r=0" class="card-img-top" alt="Bugatti Divo">
+                <div class="card-body text-center">
+                  <h5 class="card-title">Bugatti Divo</h5>
+                  <p class="text-primary">$5,800,000</p>
+                  <a href="javascript:void(0);" onclick="checkIfLoggedIn('bugatti_divo.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card car-card">
+                  <img src="https://th.bing.com/th/id/R.189817883442915ec224bbfbcf65c031?rik=Nn4EbWYdCWHU2w&pid=ImgRaw&r=0" class="card-img-top" alt="Bugatti Veyron">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Bugatti Veyron</h5>
+                    <p class="text-primary">$2,500,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('bugatti_veyron.html')" class="btn btn-outline-primary">View Details</a>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+
+        <!-- Lamborghini Cars -->
+        <div class="tab-pane fade" id="lamborghini" role="tabpanel">
+          <div class="row g-4">
+            <div class="col-md-4">
+              <div class="card car-card">
+                <img src="../IMG/lb_works_aventador_gt_evo_3.jpg" class="card-img-top" alt="Lamborghini Aventador">
+                <div class="card-body text-center">
+                  <h5 class="card-title">Lamborghini Aventador LP700-4</h5>
+                  <p class="text-primary">$400,000</p>
+                  <a href="javascript:void(0);" onclick="checkIfLoggedIn('lp700-4.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card car-card">
+                <img src="https://media.techeblog.com/images/lamborghini-sian-roadster.jpg" class="card-img-top" alt="Lamborghini Huracán">
+                <div class="card-body text-center">
+                  <h5 class="card-title">Lamborghini Huracán</h5>
+                  <p class="text-primary">$250,000</p>
+                  <a href="javascript:void(0);" onclick="checkIfLoggedIn('lamborghini-huracan.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card car-card">
+                  <img src="https://img.gta5-mods.com/q95/images/lamborghini-sian-roadster-add-on-replace/3641cd-55.jpg" class="card-img-top" alt="Lamborghini Urus">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Lamborghini Sian</h5>
+                    <p class="text-primary">$3,600,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('lamborghini_sian.html')" class="btn btn-outline-primary">View Details</a>
+                  </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Audi Cars --> 
+        <div class="tab-pane fade" id="audi" role="tabpanel">
+            <div class="row g-4">
+            <!-- Audi R8 -->
+            <div class="col-md-4">
+                <div class="card car-card">
+                <img src="https://cdn.motor1.com/images/mgl/W89egj/s1/2023-audi-r8-v10-gt-rwd-exterior.jpg" class="card-img-top" alt="Audi R8">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Audi R8</h5>
+                    <p class="text-primary">$158,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('audi_r8_details.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+                </div>
+            </div>
+        
+            <!-- Audi RS7 -->
+            <div class="col-md-4">
+                <div class="card car-card">
+                <img src="https://cdn.motor1.com/images/mgl/qnlrZ/s1/lanzamiento-audi-rs7-sportback.jpg" class="card-img-top" alt="Audi RS7">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Audi RS7</h5>
+                    <p class="text-primary">$121,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('audi_rs7_details.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+                </div>
+            </div>
+        
+            <!-- Audi Q8 e-tron -->
+            <div class="col-md-4">
+                <div class="card car-card">
+                <img src="https://cdn.motor1.com/images/mgl/vxoPlR/s1/foto---audi-q8-e-tron-2023.jpg" class="card-img-top" alt="Audi Q8 e-tron">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Audi Q8 e-tron</h5>
+                    <p class="text-primary">$75,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('audi_q8_etron_details.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="cadillac" role="tabpanel">
+            <div class="row g-4">
+              <!-- Cadillac Escalade -->
+              <div class="col-md-4">
+                <div class="card car-card">
+                  <img src="https://cdn.motor1.com/images/mgl/lNnnl/s1/cadillac-escalade-sport-edition.jpg" class="card-img-top" alt="Cadillac Escalade">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Cadillac Escalade</h5>
+                    <p class="text-primary">$88,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('cadillac_escalade_details.html')" class="btn btn-outline-primary">View Details</a>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- Cadillac CT5-V Blackwing -->
+              <div class="col-md-4">
+                <div class="card car-card">
+                  <img src="https://cdn.motor1.com/images/mgl/0eNzrW/s1/2025-cadillac-ct5-v-blackwing-update.jpg" class="card-img-top" alt="Cadillac CT5-V Blackwing">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Cadillac CT5-V Blackwing</h5>
+                    <p class="text-primary">$120,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('cadillac_ct5v_blackwing_details.html')" class="btn btn-outline-primary">View Details</a>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- Cadillac Lyriq -->
+              <div class="col-md-4">
+                <div class="card car-card">
+                  <img src="https://cdn.motor1.com/images/mgl/lpXjJ/s1/2023-cadillac-lyriq-front.jpg" class="card-img-top" alt="Cadillac Lyriq">
+                  <div class="card-body text-center">
+                    <h5 class="card-title">Cadillac Lyriq</h5>
+                    <p class="text-primary">$60,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('cadillac_lyriq_details.html')" class="btn btn-outline-primary">View Details</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Ferrari Cars -->
+        <div class="tab-pane fade" id="ferrari" role="tabpanel">
+            <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card car-card">
+                <img src="https://wallpapercave.com/wp/wp7015846.jpg" class="card-img-top" alt="Ferrari 488 GTB">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Ferrari 488 GTB</h5>
+                    <p class="text-primary">$330,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('ferrari_488_gtb.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+                </div>
+            </div>
+        
+            <div class="col-md-4">
+                <div class="card car-card">
+                <img src="https://th.bing.com/th/id/R.64e0dafb87defccf3ec15336191ac9ac?rik=Qb8fwum8%2bOf7jg&pid=ImgRaw&r=0" class="card-img-top" alt="Ferrari F8 Tributo">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Ferrari F8 Tributo</h5>
+                    <p class="text-primary">$280,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('ferrari_f8_tributo.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+                </div>
+            </div>
+        
+            <div class="col-md-4">
+                <div class="card car-card">
+                <img src="https://cdn.motor1.com/images/mgl/0ZzNW/s1/ferrari-roma.jpg" class="card-img-top" alt="Ferrari Roma">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Ferrari Roma</h5>
+                    <p class="text-primary">$220,000</p>
+                    <a href="javascript:void(0);" onclick="checkIfLoggedIn('ferrari_roma.html')" class="btn btn-outline-primary">View Details</a>
+                </div>
+                </div>
+            </div>
+        
+            </div>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 PHL'sDrC. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

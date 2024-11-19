@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sitemap - PHL'sDrC</title>
+  <!-- Link to Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 80px; /* Add space for fixed navbar */
+      background-color: #f4f6f9; /* Soft background color */
+      font-family: 'Roboto', sans-serif;
+      color: #333; /* Dark text color for better readability */
+    }
+    .navbar {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .sitemap-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-family: 'Montserrat', sans-serif;
+      color: #2c3e50;
+    }
+    h2 {
+      color: #3498db; /* A soft blue for headers */
+      font-family: 'Montserrat', sans-serif;
+      margin-top: 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      margin: 12px 0;
+    }
+    ul li a {
+      text-decoration: none;
+      color: #3498db; /* Consistent link color */
+      font-weight: 500;
+      font-family: 'Roboto', sans-serif;
+    }
+    ul li a:hover {
+      color: #1abc9c; /* Hover effect with a teal color */
+      text-decoration: underline;
+    }
+    .card {
+      margin-bottom: 20px;
+      border-radius: 10px;
+      background-color: #f9f9f9; /* Light card background */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .card-title {
+      font-weight: bold;
+      font-size: 1.3em;
+      color: #2c3e50;
+    }
+    .nav-link {
+      color: #ffffff !important;
+    }
+    .nav-link:hover {
+      color: #f8f9fa !important;
+    }
+    footer {
+      margin-top: 40px;
+      background-color: #2c3e50;
+      color: #ffffff;
+      padding: 20px 0;
+    }
+    footer p {
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="../IMG/image.png" alt="Logo" class="me-2" style="width: 40px; height: 40px;">
+        <span class="fw-bold">PHL'sDrC</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="../HTML/home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="../HTML/login.html">Login</a></li>
+          <li class="nav-item" id="signup-link"><a class="nav-link" href="../HTML/register.html">Sign Up</a></li>
+          <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="../HTML/account.html">Account</a></li>
+          <li class="nav-item" id="logout-link" style="display: none;">
+            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
+              <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="sitemap-container">
+    <h1>Sitemap</h1>
+
+    <div class="row">
+      <!-- Main Navigation Section -->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2>Main</h2>
+            <ul>
+              <li><a href="home.html">Home</a></li>
+              <li><a href="../HTML/car.html">Cars</a></li>
+              <li><a href="../HTML/info.html">About Us</a></li>
+              <li><a href="home.html#reviews">Reviews</a></li>
+              <li><a href="home.html#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Authentication Section -->
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2>Authentication</h2>
+            <ul>
+              <li><a href="../HTML/login.html">Login</a></li>
+              <li><a href="../HTML/register.html">Sign Up</a></li>
+              <li><a href="../HTML/account.html">Account</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Cars Section -->
+      <div class="col-md-12">
+        <h2>Cars</h2>
+
+        <!-- Row for Cars, using Bootstrap grid to divide into 3 columns -->
+        <div class="row">
+          <!-- Rolls-Royce -->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Rolls-Royce</h5>
+                <ul>
+                  <li><a href="../HTML/rolls_royce_phantom_details.html">Phantom</a></li>
+                  <li><a href="../HTML/rolls_royce_ghost_details.html">Ghost</a></li>
+                  <li><a href="../HTML/rolls_royce_cullinan_details.html">Cullinan</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Porsche-->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Porsche</h5>
+                <ul>
+                  <li><a href="../HTML/porsche911.html">Porsche 911 Carrera S</a></li>
+                  <li><a href="../HTML/porsche_taycan_details.html">Porsche Taycan</a></li>
+                  <li><a href="../HTML/porsche_cayenne_details.html">Porsche Cayenne</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aston Martin-->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Aston Martin</h5>
+                <ul>
+                  <li><a href="../HTML/valhalla.html">Aston Martin Valhalla</a></li>
+                  <li><a href="../HTML/aston_martin_vantage_details.html">Aston Martin Vantage</a></li>
+                  <li><a href="../HTML/aston_martin_dbs_superleggera_details.html">Aston Martin DBS Superleggera</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bugatti -->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Bugatti</h5>
+                <ul>
+                  <li><a href="../HTML/bugatti_chiron.html">Bugatti Chiron</a></li>
+                  <li><a href="../HTML/bugatti_divo.html">Bugatti Divo</a></li>
+                  <li><a href="../HTML/bugatti_veyron.html">Bugatti Veyron</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lamborghini -->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Lamborghini</h5>
+                <ul>
+                  <li><a href="../HTML/lp700-4.html">Lamborghini Aventador LP 700-4</a></li>
+                  <li><a href="../HTML/lamborghini-huracan.html">Lamborghini Huracán</a></li>
+                  <li><a href="../HTML/lamborghini_sian.html">Lamborghini Sian</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Audi -->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Audi</h5>
+                <ul>
+                  <li><a href="../HTML/audi_r8_details.html">Audi R8</a></li>
+                  <li><a href="../HTML/audi_rs7_details.html">Audi RS7</a></li>
+                  <li><a href="../HTML/audi_q8_etron_details.html">Audi Q8 E-tron</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cadillac -->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Cadillac</h5>
+                <ul>
+                  <li><a href="../HTML/cadillac_ct5v_blackwing_details.html">Cadillac CT5-V Blackwing</a></li>
+                  <li><a href="../HTML/cadillac_escalade_details.html">Cadillac Escalade</a></li>
+                  <li><a href="../HTML/cadillac_lyriq_details.html">Cadillac Lyriq</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ferrari -->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Ferrari</h5>
+                <ul>
+                  <li><a href="../HTML/ferrari_488_gtb.html">Ferrari 488 GTB</a></li>
+                  <li><a href="../HTML/ferrari_f8_tributo.html">Ferrari F8 Tributo</a></li>
+                  <li><a href="../HTML/ferrari_roma.html">Ferrari Roma</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h2>Contact Us</h2>
+            <ul>
+              <li><a href="home.html#contact">Contact Form</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="text-center">&copy; 2024 PHL'sDrC. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

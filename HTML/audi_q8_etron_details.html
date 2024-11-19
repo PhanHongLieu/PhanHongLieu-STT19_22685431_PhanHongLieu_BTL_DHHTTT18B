@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audi Q7 - Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../CSS/car_detail.css">
+  <script>
+    // Kiểm tra trạng thái đăng nhập và cập nhật navbar khi tải trang
+    function checkLoginStatus() {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      const loginLink = document.getElementById('login-link');
+      const signupLink = document.getElementById('signup-link');
+      const accountLink = document.getElementById('account-link');
+      const logoutLink = document.getElementById('logout-link');
+      
+      if (loggedIn) {
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        accountLink.style.display = 'block';
+        logoutLink.style.display = 'block';
+      } else {
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+        accountLink.style.display = 'none';
+        logoutLink.style.display = 'none';
+      }
+    }
+
+    // Kiểm tra nếu người dùng đã đăng nhập trước khi xem chi tiết
+    function checkIfLoggedIn(targetPage) {
+      const loggedIn = localStorage.getItem('loggedIn') === 'true';
+      if (!loggedIn) {
+        alert("Please log in to view details!");
+        window.location.href = "../HTML/login.html";
+      } else {
+        // Redirect to the target page even if already logged in
+        window.location.href = targetPage;
+      }
+    }
+
+    // Hàm đăng xuất
+    function logout() {
+      localStorage.setItem('loggedIn', 'false');
+      alert("You have logged out.");
+      window.location.reload();  // Tải lại trang để cập nhật navbar
+    }
+
+    // Chạy kiểm tra đăng nhập khi trang được tải
+    document.addEventListener('DOMContentLoaded', checkLoginStatus);
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="home.html">PHL'sDrC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="../HTML/home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+          <li class="nav-item" id="login-link"><a class="nav-link" href="../HTML/login.html">Login</a></li>
+          <li class="nav-item" id="signup-link"><a class="nav-link" href="../HTML/register.html">Sign Up</a></li>
+          <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="../HTML/account.html">Account</a></li>
+          <li class="nav-item" id="logout-link" style="display: none;">
+            <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
+              <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Car Details Section -->
+  <section class="py-5">
+    <div class="container">
+      <h1 class="text-center fw-bold mb-4">Audi Q8 e-tron</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="main-image">
+            <img id="main-image" src="https://cdn.motor1.com/images/mgl/vxoPlR/s1/foto---audi-q8-e-tron-2023.jpg" class="img-fluid rounded" alt="Audi Q8 e-tron">
+          </div>
+          <div class="thumbnail-images mt-3">
+            <div class="row">
+              <div class="col-4">
+                <img src="https://cdn.motor1.com/images/mgl/vxoPlR/s1/foto---audi-q8-e-tron-2023.jpg" class="img-fluid rounded thumbnail" alt="Thumbnail 1" onclick="changeImage('https://cdn.motor1.com/images/mgl/vxoPlR/s1/foto---audi-q8-e-tron-2023.jpg')">
+              </div>
+              <div class="col-4">
+                <img src="https://th.bing.com/th/id/R.014428a838a1749430ddb0de57315bfd?rik=3sWY1dY7xdSaLQ&pid=ImgRaw&r=0" class="img-fluid rounded thumbnail" alt="Thumbnail 2" onclick="changeImage('https://th.bing.com/th/id/R.014428a838a1749430ddb0de57315bfd?rik=3sWY1dY7xdSaLQ&pid=ImgRaw&r=0')">
+              </div>
+              <div class="col-4">
+                <img src="https://warranty.audi.co.nz/media/2593/_0007_audi-q8-e-tron-1.jpg?anchor=center&mode=crop&width=1920&height=1080&rnd=133124255720000000" class="img-fluid rounded thumbnail" alt="Thumbnail 3" onclick="changeImage('https://warranty.audi.co.nz/media/2593/_0007_audi-q8-e-tron-1.jpg?anchor=center&mode=crop&width=1920&height=1080&rnd=133124255720000000')">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h2>1. Engine</h2>
+          <ul>
+            <li><strong>Engine Type:</strong> 3.0L V6 Turbocharged</li>
+            <li><strong>Horsepower:</strong> 335 hp</li>
+          </ul>
+
+          <h2>2. Features</h2>
+          <ul>
+            <li><strong>Seats:</strong> Up to 7</li>
+            <li><strong>Infotainment:</strong> Virtual Cockpit Plus</li>
+          </ul>
+          <a href="checkout.html?carModel=Audi%20Q7&carPrice=$75,000&carImage=https://cdn.motor1.com/images/mgl/vxoPlR/s1/foto---audi-q8-e-tron-2023.jpg" class="btn btn-primary" role="button">Book Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <p>&copy; 2024 PHL'sDrC. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    function changeImage(imageSrc) {
+      document.getElementById('main-image').src = imageSrc;
+    }
+  </script>
+</body>
+</html>

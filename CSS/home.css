@@ -1,0 +1,26 @@
+body {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .hero-section {
+    background: url('../IMG/hinh-nen-sieu-xe-Bugatti-1-800x450.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card {
+    border: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  footer {
+    background: #222;
+  }
+  
