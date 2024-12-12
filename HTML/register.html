@@ -14,16 +14,27 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 0;
     }
     .register-card {
       padding: 30px;
       max-width: 400px;
       width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
     }
     .register-title {
       font-weight: 600;
       margin-bottom: 20px;
       color: #f3eeee;
+    }
+    .form-control.is-invalid {
+      border-color: red;
+    }
+    .error-message {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 5px;
     }
     .btn-custom {
       background: #339af4;
@@ -31,11 +42,7 @@
       color: #fff;
     }
     .btn-custom:hover {
-      background: #339af4;
-    }
-    .text-small {
-      font-size: 0.9rem;
-      color: #666;
+      background: #1d75bd;
     }
     .text-small a {
       color: #339af4;
@@ -46,88 +53,134 @@
     }
   </style>
   <script>
-    // Đăng ký tài khoản mới
+    function validateEmail(email) {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(email);
+    }
+    
+    function validatePassword(password) {
+      return password.length >= 8;  // Mật khẩu phải có ít nhất 8 ký tự
+    }
+    
+    function showError(field, message) {
+      // Xóa thông báo lỗi cũ nếu có
+      const existingError = field.parentNode.querySelector(".error-message");
+      if (existingError) existingError.remove();
+    
+      // Thêm lớp 'is-invalid'
+      field.classList.add("is-invalid");
+    
+      // Tạo thông báo lỗi mới
+      const error = document.createElement("div");
+      error.className = "error-message";
+      error.textContent = message;
+      field.parentNode.appendChild(error);
+    }
+    
+    function clearError(field) {
+      field.classList.remove("is-invalid");
+      const existingError = field.parentNode.querySelector(".error-message");
+      if (existingError) existingError.remove();
+    }
+    
+    function handleEmailValidation(event) {
+      const emailField = event.target;
+      const email = emailField.value.trim();
+    
+      if (!validateEmail(email)) {
+        showError(emailField, "Invalid email format. Must be in the form abc@gmail.com.");
+      } else {
+        clearError(emailField);
+      }
+    }
+    
+    function handlePasswordValidation(event) {
+      const passwordField = event.target;
+      const password = passwordField.value;
+    
+      if (!validatePassword(password)) {
+        showError(passwordField, "Password must be at least 8 characters long.");
+      } else {
+        clearError(passwordField);
+      }
+    }
+    
     function handleRegister(event) {
       event.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
-
-      const users = JSON.parse(localStorage.getItem("users")) || [];
-
-      // Kiểm tra email đã tồn tại
-      if (users.some(u => u.email === email)) {
-        alert("Email is already registered!");
-        return;
+    
+      const emailField = document.getElementById("email");
+      const passwordField = document.getElementById("password");
+      const confirmPasswordField = document.getElementById("confirmPassword");
+    
+      const email = emailField.value.trim();
+      const password = passwordField.value;
+      const confirmPassword = confirmPasswordField.value;
+    
+      // Xóa tất cả lỗi trước khi kiểm tra
+      clearError(emailField);
+      clearError(passwordField);
+      clearError(confirmPasswordField);
+    
+      let isValid = true;
+    
+      // Kiểm tra email
+      if (!validateEmail(email)) {
+        showError(emailField, "Invalid email format. Must be in the form abc@gmail.com.");
+        isValid = false;
       }
-
+    
       // Kiểm tra mật khẩu
-      if (password.length < 6) {
-        alert("Password must be at least 6 characters!");
-        return;
+      if (!validatePassword(password)) {
+        showError(passwordField, "Password must be at least 8 characters long.");
+        isValid = false;
       }
-
+    
       // Kiểm tra mật khẩu trùng khớp
       if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
+        showError(confirmPasswordField, "Passwords do not match.");
+        isValid = false;
       }
-
-      // Lưu thông tin tài khoản
-      const newUser = { name, email, password };
-      users.push(newUser);
-      localStorage.setItem("users", JSON.stringify(users));
-      alert("Registration successful! Please log in.");
-      window.location.href = "login.html";
+    
+      // Đăng ký nếu hợp lệ
+      if (isValid) {
+        alert("Registration successful!");
+        window.location.href = "login.html";
+      }
     }
+    
+    // Gắn sự kiện kiểm tra email và mật khẩu ngay khi người dùng nhập
+    document.addEventListener("DOMContentLoaded", () => {
+      const emailField = document.getElementById("email");
+      const passwordField = document.getElementById("password");
+    
+      emailField.addEventListener("input", handleEmailValidation);
+      passwordField.addEventListener("input", handlePasswordValidation);
+    });
   </script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
-        <div class="container">
-          <a class="navbar-brand d-flex align-items-center" href="#">
-            <img src="../IMG/image.png" alt="Logo" class="me-2" style="width: 40px; height: 40px;">
-            <span class="fw-bold">PHL'sDrC</span>
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a class="nav-link active" href="home.html">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
-              <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
-              <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
-              <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
-            </ul>
-          </div>
-        </div>
-    </nav>
-
-    <div class="register-card">
-        <h2 class="text-center register-title">Create an Account</h2>
-        <form onsubmit="handleRegister(event)">
-        <div class="mb-3">
-            <label for="name" class="form-label text-light">Full Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label text-light">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label text-light">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Create a password" minlength="6" required>
-        </div>
-        <div class="mb-3">
-            <label for="confirmPassword" class="form-label text-light">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
-        </div>
-        <button type="submit" class="btn btn-custom w-100">Register</button>
-        <p class="text-center text-small mt-3 text-light">Already have an account? <a href="login.html">Log in</a></p>
-        </form>
-    </div>
+  <div class="register-card">
+    <h2 class="text-center register-title">Create an Account</h2>
+    <form onsubmit="handleRegister(event)">
+      <div class="mb-3">
+        <label for="name" class="form-label text-light">Full Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label text-light">Email Address</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label text-light">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label text-light">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+      </div>
+      <button type="submit" class="btn btn-custom w-100">Register</button>
+      <p class="text-center text-small mt-3 text-light">Already have an account? <a href="login.html">Log in</a></p>
+    </form>
+  </div>
 </body>
 </html>
