@@ -96,6 +96,41 @@
     // Chạy kiểm tra đăng nhập khi trang được tải
     document.addEventListener('DOMContentLoaded', checkLoginStatus);
   </script>
+
+  <script>
+    // Lấy dữ liệu từ URL và hiển thị
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get('name');
+      const email = params.get('email');
+      const phone = params.get('phone');
+      const carModel = params.get('carModel');
+      const carPrice = params.get('carPrice');
+      const paymentMethod = params.get('payment-method');
+  
+      // Kiểm tra và hiển thị thông tin
+      if (name && email && phone && carModel && carPrice && paymentMethod) {
+        document.querySelector('.confirmation-container').innerHTML = `
+          <h1>Thank you, ${name}!</h1>
+          <p>Your order details:</p>
+          <ul>
+            <li><strong>Car Model:</strong> ${carModel}</li>
+            <li><strong>Price:</strong> ${carPrice}</li>
+            <li><strong>Email:</strong> ${email}</li>
+            <li><strong>Phone:</strong> ${phone}</li>
+            <li><strong>Payment Method:</strong> ${paymentMethod}</li>
+          </ul>
+          <a href="../HTML/car.html" class="btn btn-primary mt-3">Back to Cars</a>
+        `;
+      } else {
+        document.querySelector('.confirmation-container').innerHTML = `
+          <p>Invalid order details. Please try again.</p>
+          <a href="../HTML/car.html" class="btn btn-danger mt-3">Back to Cars</a>
+        `;
+      }
+    });
+  </script>
+  
 </head>
 <body>
   <!-- Navbar -->
