@@ -5,50 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script>
-    // Kiểm tra trạng thái đăng nhập và cập nhật navbar khi tải trang
-    function checkLoginStatus() {
-      const loggedIn = localStorage.getItem('loggedIn') === 'true';
-      const loginLink = document.getElementById('login-link');
-      const signupLink = document.getElementById('signup-link');
-      const accountLink = document.getElementById('account-link');
-      const logoutLink = document.getElementById('logout-link');
-      
-      if (loggedIn) {
-        loginLink.style.display = 'none';
-        signupLink.style.display = 'none';
-        accountLink.style.display = 'block';
-        logoutLink.style.display = 'block';
-      } else {
-        loginLink.style.display = 'block';
-        signupLink.style.display = 'block';
-        accountLink.style.display = 'none';
-        logoutLink.style.display = 'none';
-      }
-    }
-
-    // Kiểm tra nếu người dùng đã đăng nhập trước khi xem chi tiết
-    function checkIfLoggedIn(targetPage) {
-      const loggedIn = localStorage.getItem('loggedIn') === 'true';
-      if (!loggedIn) {
-        alert("Please log in to view details!");
-        window.location.href = "../HTML/login.html";
-      } else {
-        // Redirect to the target page even if already logged in
-        window.location.href = targetPage;
-      }
-    }
-
-    // Hàm đăng xuất
-    function logout() {
-      localStorage.setItem('loggedIn', 'false');
-      alert("You have logged out.");
-      window.location.reload();  // Tải lại trang để cập nhật navbar
-    }
-
-    // Chạy kiểm tra đăng nhập khi trang được tải
-    document.addEventListener('DOMContentLoaded', checkLoginStatus);
-  </script>
   <style>
     body {
       background-color: #f8f9fa;
@@ -65,48 +21,46 @@
       const params = new URLSearchParams(window.location.search);
       const carModel = params.get("carModel");
       const carPrice = params.get("carPrice");
-      const carImage = params.get("carImage");
+      const carImage = params.get("carImage") || "IMG/default-car.jpg";
 
       if (carModel && carPrice) {
         document.getElementById("carModel").value = carModel;
         document.getElementById("carPrice").value = carPrice;
-        document.getElementById("carImage").src = carImage || "img/default-car.jpg";
+        document.getElementById("carImage").src = carImage;
         document.getElementById("carTitle").innerText = carModel;
+      } else {
+        alert("Car details are missing. Redirecting to car list.");
+        window.location.href = "../HTML/car.html";
       }
     }
-    window.onload = populateCarDetails;
+
+    // Xử lý ảnh lỗi
+    function handleImageError(imgElement) {
+      imgElement.src = "IMG/default-car.jpg";
+    }
+
+    document.addEventListener("DOMContentLoaded", populateCarDetails);
   </script>
 </head>
 <body>
   <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark shadow">
-        <div class="container">
-          <a class="navbar-brand fw-bold">PHL'sDrC</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item"><a class="nav-link active" href="../HTML/home.html">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
-              <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
-              <li class="nav-item"><a class="nav-link" href="home.html#reviews">Reviews</a></li>
-              <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
-              <li class="nav-item" id="login-link"><a class="nav-link" href="../HTML/login.html">Login</a></li>
-              <li class="nav-item" id="signup-link"><a class="nav-link" href="../HTML/register.html">Sign Up</a></li>
-              <li class="nav-item" id="account-link" style="display: none;"><a class="nav-link" href="../HTML/account.html">Account</a></li>
-              <li class="nav-item" id="logout-link" style="display: none;">
-                <a class="nav-link" href="javascript:void(0);" onclick="logout()">Logout</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../HTML/sitemap.html" title="Sitemap">
-                  <img src="https://cdn2.iconfinder.com/data/icons/webdesign-and-development-02-color-shadow/128/website-map_website_map_direction_marker_contemporary_navigation_gadget_navigation_infographic-1024.png" alt="Sitemap" style="width: 24px; height: 24px;">
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold">PHL'sDrC</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="../HTML/home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/car.html">Cars</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/info.html">About Us</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/reviews.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="../HTML/contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
   <!-- Checkout Section -->
   <section class="py-5">
@@ -115,7 +69,7 @@
       <div class="row">
         <!-- Image -->
         <div class="col-md-6 text-center">
-          <img id="carImage" src="IMG/default-car.jpg" class="car-image rounded mb-3" alt="Car Image">
+          <img id="carImage" src="IMG/default-car.jpg" class="car-image rounded mb-3" alt="Car Image" onerror="handleImageError(this)">
         </div>
         <!-- Form -->
         <div class="col-md-6">
@@ -157,7 +111,7 @@
 
             <!-- Nút thanh toán -->
             <div class="col-12 text-center">
-              <button type="submit" class="btn btn-success btn-lg" href="../HTML/payment-cofirm.html">Place Order</button>
+              <button type="submit" class="btn btn-success btn-lg">Place Order</button>
             </div>
           </form>
         </div>
@@ -169,5 +123,7 @@
   <footer class="bg-dark text-white text-center py-3">
     <p>&copy; 2024 PHL'sDrC. All Rights Reserved.</p>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
